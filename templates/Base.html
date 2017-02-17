@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NotiWeb</title>
+    <link href="{% static "styles/font-awesome.css" %}" type="text/css" rel="stylesheet">
+    <link href="{% static "styles/bootstrap.css" %}" type="text/css" rel="stylesheet">
+    <link rel="alternate" type="application/rss+xml" title="Últimos noticias encontradas" href="/feed" />
+
+</head>
+<body>
+<div class="container">
+        {% block body %}
+        {% endblock %}
+</div>
+</body>
+
+    <script type="text/javascript" src="{% static "js/jquery-1.11.2.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/bootstrap.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/masonry.pkgd.min.js" %}"></script>
+
+</html>
