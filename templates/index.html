@@ -2,16 +2,18 @@
 {% load get_color_tag %}
 
 {% block body %}
-    <div class="pull-right" style="margin-top: 20px; margin-right: 20px; "><a target="_blank" href="/feed" style="color: orangered"><i class="fa fa-feed"></i></a> </div>
-    <div class="jumbotron text-center" style="margin-top: 10px">
+    <div class="pull-right" style="margin-top: 20px; margin-right: 20px; "><a target="_blank" href="/feed" style="color: white"><i class="fa fa-feed"></i></a> </div>
+    <div class="jumbotron text-center" style="margin-top: 10px; color: white; background-color: darkmagenta">
         <h1>NotiWeb</h1>
         <p class="lead">Las últimas noticias de toda la red en un solo sitio.</p>
         {#    <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>#}
     </div>
     <div class="row marketing grid" data-masonry='{ "itemSelector": ".grid-item" }'>
     <div class="col-sm-4 col-md-4 grid-item">
-        <div class="col-sm-12 col-md-12 thumbnail text-center" style="background-color: #1b6d85; color: white; border-radius: 10px">
-            <h2><i class="fa fa-gitlab"></i> Visítame en Gitlab</h2>
+        <div class="col-sm-12 col-md-12 text-center" data-masonry='{ "itemSelector": ".grid-item2" }' style="margin-bottom: 10px">
+            <a target="_blank" href="#"><div class="col-sm-2 col-md-3 grid-item2" style="margin:5px; background-color: orangered; color: white; border-radius: 10px"><h1><i class="fa fa-gitlab"></i></h1></div></a>
+            <a target="_blank" href="https://github.com/jadolg/NotiWeb"><div class="col-sm-2 col-md-3 grid-item2" style="margin:5px; background-color: black; color: white; border-radius: 10px"><h1><i class="fa fa-github"></i></h1></div></a>
+            <a target="_blank" href="#"><div class="col-sm-2 col-md-3 grid-item2" style="margin:5px; background-color: blue; color: white; border-radius: 10px"><h1><i class="fa fa-user"></i></h1></div></a>
         </div>
         {% for anuncio in anuncios %}
             <div class="col-sm-12 col-md-12 thumbnail" style="background-color: {% get_random_color %}; color: white; border-radius: 10px">
