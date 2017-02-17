@@ -1,0 +1,4 @@
+beautifulsoup4==4.4.1
+Django==1.10.5
+feedparser==5.2.1
+grabfeed==0.3.21
