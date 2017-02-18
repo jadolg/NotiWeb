@@ -25,3 +25,6 @@
 
     - Run development server on Docker
         `docker run -v /home/akiel/PycharmProjects/NotiWeb/:/home/NotiWeb -p 8080:8000 --rm --link mysql_notiweb -it notiweb manage.py runserver 0.0.0.0:8000`
+
+
+ 6. Remember to serve the static files and the media files on nginx/apache
