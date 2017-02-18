@@ -72,7 +72,7 @@ WSGI_APPLICATION = 'NotiWeb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-if os.environ['DEVELOPMENT']:
+if 'DEVELOPMENT' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
