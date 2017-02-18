@@ -12,7 +12,7 @@ class Sitio(models.Model):
     titulo = models.CharField(max_length=250)
     foto = models.FileField(upload_to='.')
     activo = models.BooleanField(default=True)
-    rss = models.TextField( null=True, blank=True)
+    rss = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.titulo
@@ -26,7 +26,6 @@ def insertar_rss(sender, instance, created, **kwargs):
             instance.save()
 
         scan(instance)
-
 
 
 class Entrada(models.Model):
@@ -45,14 +44,11 @@ class Anuncio(models.Model):
     texto = models.TextField()
 
     def __str__(self):
-        return self.titulo+": "+self.texto
-
+        return self.titulo + ": " + self.texto
 
 
 def scan(sitio):
-    feed_url = get_feed_url(sitio.url)
-    print(feed_url)
-
+    print('scanning: ' + sitio.rss)
     for feed in get_news(sitio.rss):
         print(feed)
         if len(Entrada.objects.filter(url=feed['url'])) == 0:
