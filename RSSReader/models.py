@@ -8,11 +8,11 @@ from RSSReader.RSSFetch import get_feed_url, get_news
 
 
 class Sitio(models.Model):
-    url = models.CharField(max_length=1000, unique= True)
+    url = models.TextField()
     titulo = models.CharField(max_length=250)
     foto = models.FileField(upload_to='.')
     activo = models.BooleanField(default=True)
-    rss = models.CharField(max_length=1000, null=True, blank=True)
+    rss = models.TextField( null=True, blank=True)
 
     def __str__(self):
         return self.titulo
@@ -31,9 +31,9 @@ def insertar_rss(sender, instance, created, **kwargs):
 
 class Entrada(models.Model):
     sitio = models.ForeignKey(Sitio, on_delete=models.CASCADE)
-    url = models.CharField(max_length=1000, unique=True)
+    url = models.TextField()
     titulo = models.CharField(max_length=250)
-    descripcion = models.CharField(max_length=1000)
+    descripcion = models.TextField()
     timestamp = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -42,7 +42,7 @@ class Entrada(models.Model):
 
 class Anuncio(models.Model):
     titulo = models.CharField(max_length=50)
-    texto = models.CharField(max_length=1000)
+    texto = models.TextField()
 
     def __str__(self):
         return self.titulo+": "+self.texto
