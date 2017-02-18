@@ -48,7 +48,6 @@ class Anuncio(models.Model):
 
 
 def scan(sitio):
-    print('scanning: ' + sitio.rss)
     for feed in get_news(sitio.rss):
         # print(feed)
         if len(Entrada.objects.filter(url=feed['url'])) == 0:
