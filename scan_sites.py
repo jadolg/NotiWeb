@@ -11,12 +11,12 @@ from RSSReader.models import Sitio, scan
 if __name__ == '__main__':
     while 1:
         try:
-            print('actualizando feeds...')
-            for sitio in Sitio.objects.all():
-                try:
-                    scan(sitio)
-                except:
-                    pass
+            print('actualizando feeds... ')
+            for sitio in Sitio.objects.filter(activo=True):
+                print('actualizando: ' + sitio.rss, end='... ')
+                scan(sitio)
+                print('[hecho]')
+
         except KeyboardInterrupt:
             break
         print('[] hecho. durmiendo ahora!')
