@@ -13,6 +13,7 @@ class Sitio(models.Model):
     foto = models.FileField(upload_to='.')
     activo = models.BooleanField(default=True)
     rss = models.TextField(null=True, blank=True)
+    upsidedown = models.BooleanField(default=False)
 
     def __str__(self):
         return self.titulo
@@ -20,13 +21,12 @@ class Sitio(models.Model):
 
 @receiver(post_save, sender=Sitio)
 def insertar_rss(sender, instance, created, **kwargs):
-    if created:
-        if not instance.rss or instance.rss == '':
-            instance.rss = get_feed_url(instance.url)
-            instance.save()
+    if not instance.rss or instance.rss == '':
+        instance.rss = get_feed_url(instance.url)
+        instance.save()
 
+    if instance.activo:
         scan(instance)
-
 
 class Entrada(models.Model):
     sitio = models.ForeignKey(Sitio, on_delete=models.CASCADE)
@@ -48,7 +48,14 @@ class Anuncio(models.Model):
 
 
 def scan(sitio):
+    aux = []
     for feed in get_news(sitio.rss):
         # print(feed)
         if len(Entrada.objects.filter(url=feed['url'])) == 0:
-            Entrada(sitio=sitio, url=feed['url'], titulo=feed['titulo'], descripcion=feed['descripcion']).save()
+            if not sitio.upsidedown:
+                Entrada(sitio=sitio, url=feed['url'], titulo=feed['titulo'], descripcion=feed['descripcion']).save()
+            else:
+                aux.append(Entrada(sitio=sitio, url=feed['url'], titulo=feed['titulo'], descripcion=feed['descripcion']))
+
+    for f in reversed(aux):
+        f.save()
