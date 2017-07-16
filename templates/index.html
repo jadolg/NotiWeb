@@ -1,57 +1,66 @@
 {% extends "Base.html" %} {% load get_color_tag %} {% block body %}
-<div class="pull-right" style="margin-top: 20px; margin-right: 20px; "><a target="_blank" href="/feed" style="color: white"><i class="fa fa-feed"></i></a> </div>
-<div class="jumbotron text-center" style="margin-top: 10px; color: white; background-color: darkmagenta">
-    <h1>NotiWeb</h1>
-    <p class="lead">Las últimas noticias de toda la red en un solo sitio.</p>
-</div>
-<div class="row marketing grid" data-masonry='{ "itemSelector": ".grid-item" }'>
-    <div class="col-sm-4 col-md-4 grid-item">
-        <div class="col-sm-12 col-md-12 text-center" data-masonry='{ "itemSelector": ".grid-item2" }' style="margin-bottom: 10px">
-            <a target="_blank" href="https://git.netlab.snet/guamulo/NotiWeb">
-                <div class="col-sm-2 col-md-3 grid-item2" style="margin:5px; background-color: orangered; color: white; border-radius: 10px">
-                    <h1><i class="fa fa-gitlab"></i></h1>
-                </div>
-            </a>
-            <a target="_blank" href="https://github.com/jadolg/NotiWeb">
-                <div class="col-sm-2 col-md-3 grid-item2" style="margin:5px; background-color: black; color: white; border-radius: 10px">
-                    <h1><i class="fa fa-github"></i></h1>
-                </div>
-            </a>
-            <a target="_blank" href="https://192.168.32.4/user/guamulo">
-                <div class="col-sm-2 col-md-3 grid-item2" style="margin:5px; background-color: #97C03D; color: white; border-radius: 10px">
-                    <h1><i class="fa fa-at"></i></h1>
-                </div>
-            </a>
-        </div>
-        {% for anuncio in anuncios %}
-        <div class="col-sm-12 col-md-12 thumbnail" style="background-color: {% get_random_color %}; color: white; border-radius: 10px">
-            <div class="col-md-2">
-                <h2><i class="fa fa-bullhorn"></i></h2>
+    <div class="pull-right" style="margin-top: 20px; margin-right: 20px; "><a target="_blank" href="/feed"
+                                                                              style="color: white"><i
+            class="fa fa-feed"></i></a></div>
+    <div class="jumbotron text-center" style="margin-top: 10px; color: white; background-color: darkmagenta">
+        <h1>NotiWeb</h1>
+        <p class="lead">Las últimas noticias de toda la red en un solo sitio.</p>
+    </div>
+    <div class="row marketing grid" data-masonry='{ "itemSelector": ".grid-item" }'>
+        <div class="col-sm-12 col-md-4 grid-item">
+            <div class="col-sm-12 col-md-12 text-center" data-masonry='{ "itemSelector": ".grid-item2" }'
+                 style="margin-bottom: 10px">
+                <a target="_blank" href="https://git.netlab.snet/guamulo/NotiWeb">
+                    <div class="col-sm-2 col-md-3 grid-item2"
+                         style="margin:2%; background-color: orangered; color: white; border-radius: 10px">
+                        <h1><i class="fa fa-gitlab"></i></h1>
+                    </div>
+                </a>
+                <a target="_blank" href="https://github.com/jadolg/NotiWeb">
+                    <div class="col-sm-2 col-md-3 grid-item2"
+                         style="margin:2%; background-color: black; color: white; border-radius: 10px">
+                        <h1><i class="fa fa-github"></i></h1>
+                    </div>
+                </a>
+                <a target="_blank" href="https://192.168.32.4/user/guamulo">
+                    <div class="col-sm-2 col-md-3 grid-item2"
+                         style="margin:2%; background-color: #97C03D; color: white; border-radius: 10px">
+                        <h1><i class="fa fa-at"></i></h1>
+                    </div>
+                </a>
             </div>
-            <div class="col-md-10">
-                <h5> {{ anuncio.titulo }}</h5>
-                <h6>{{ anuncio.texto }}</h6>
-            </div>
+            {% for anuncio in anuncios %}
+                <div class="col-xs-12 col-sm-12 col-md-12 thumbnail"
+                     style="background-color: {% get_random_color %}; color: white; border-radius: 10px">
+                    <div class="col-xs-1 col-sm-2 col-md-2">
+                        <h2><i class="fa fa-bullhorn"></i></h2>
+                    </div>
+                    <div class="col-xs-11 col-sm-10 col-md-10">
+                        <h5> {{ anuncio.titulo }}</h5>
+                        <h6>{{ anuncio.texto }}</h6>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
+        {% for sitio in sitios %}
+            <div class="col-sm-12 col-md-4 grid-item">
+                <div class="thumbnail">
+                    <img style="width: auto; height: 50px" src="/media/{{ sitio.foto }}" alt="">
+                    <div class="caption">
+                        <h3><a target="_blank" href="{{ sitio.url }}">{{ sitio.titulo }}</a></h3>
+                        {% for feed in feeds %} {% if feed.sitio == sitio %}
+                            <div class="panel" style="overflow-wrap: break-word">
+                                <h5><a target="_blank" href="{{ feed.url }}">{{ feed.titulo }}</a></h5>
+                                <h6>{{ feed.descripcion|truncatewords:30 }}</h6>
+                            </div>
+                        {% endif %} {% endfor %}
+                        <p><a target="_blank" href="{{ sitio.rss }}" class="btn btn-primary" role="button"><i
+                                class="fa fa-rss"></i></a></p>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
     </div>
-    {% for sitio in sitios %}
-    <div class="col-sm-4 col-md-4 grid-item">
-        <div class="thumbnail">
-            <img style="width: auto; height: 50px" src="/media/{{ sitio.foto }}" alt="">
-            <div class="caption">
-                <h3><a target="_blank" href="{{ sitio.url }}">{{ sitio.titulo }}</a></h3>
-                {% for feed in feeds %} {% if feed.sitio == sitio %}
-                <div class="panel" style="overflow-wrap: break-word">
-                    <h5><a target="_blank" href="{{ feed.url }}">{{ feed.titulo }}</a></h5>
-                    <h6>{{ feed.descripcion|truncatewords:30 }}</h6>
-                </div>
-                {% endif %} {% endfor %}
-                <p><a target="_blank" href="{{ sitio.rss }}" class="btn btn-primary" role="button"><i class="fa fa-rss"></i></a> </p>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</div>
-<div class="text-center" style="margin-top: 100px; margin-bottom: 20px"><img src="/static/img/djangopowered126x54.gif"></div>
+    <div class="text-center" style="margin-top: 100px; margin-bottom: 20px"><img
+            src="/static/img/djangopowered126x54.gif"></div>
 {% endblock %}

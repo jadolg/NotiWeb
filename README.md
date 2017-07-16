@@ -7,7 +7,7 @@
 
 ### Running on Docker
  1. Run a MySQL container:
- `docker run --name mysql_notiweb -e MYSQL_DATABASE=notiweb -e MYSQL_ROOT_PASSWORD=qweqwe123 -d mysql:5.6`
+ `docker run --restart always --name mysql_notiweb -e MYSQL_DATABASE=notiweb -e MYSQL_ROOT_PASSWORD=qweqwe123 -d mysql:5.6`
 
  2. Run Migrations
 `docker run -v /home/akiel/PycharmProjects/NotiWeb/:/home/NotiWeb -p 8080:8000 --rm --link mysql_notiweb -it notiweb manage.py migrate`
