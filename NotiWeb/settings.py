@@ -72,6 +72,8 @@ WSGI_APPLICATION = 'NotiWeb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
+DATABASES = {}
+
 if 'DEVELOPMENT' in os.environ:
     DATABASES = {
         'default': {
@@ -79,7 +81,7 @@ if 'DEVELOPMENT' in os.environ:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-else:
+elif 'DOCKER' in os.environ:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.mysql",
@@ -90,6 +92,9 @@ else:
             # "HOST":"127.0.0.1",
         }
     }
+else:
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config()
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
