@@ -15,11 +15,14 @@ def index(request):
 
 
 def create_admin(request):
-    admin = User(username='admin', email='diazorozcoj@gmail.com')
-    admin.set_password('changeit')
-    admin.save()
+    if User.objects.find(username='admin') <= 0:
+        admin = User(username='admin', email='diazorozcoj@gmail.com')
+        admin.set_password('changeit')
+        admin.save()
 
-    return HttpResponse('OK')
+        return HttpResponse('OK')
+    else:
+        return HttpResponse('User already exists')
 
 
 def update_feeds(request):
