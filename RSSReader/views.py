@@ -15,8 +15,8 @@ def index(request):
 
 
 def create_admin(request):
-    for i in User.objects.filter(username='admin'):
-        i.delete()
+    # for i in User.objects.filter(username='admin'):
+    #     i.delete()
     if len(User.objects.filter(username='admin')) <= 0:
         admin = User(username='admin', email='diazorozcoj@gmail.com')
         admin.is_staff = True
