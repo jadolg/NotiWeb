@@ -102,7 +102,6 @@ NotiWeb/settings.pyc
 RSSReader/RSSFetch.pyc
 RSSReader/__init__.pyc
 RSSReader/__pycache__/
-RSSReader/migrations/0002_sitio_upsidedown.py
 RSSReader/migrations/__pycache__/
 RSSReader/models.pyc
 RSSReader/templatetags/__init__.pyc
