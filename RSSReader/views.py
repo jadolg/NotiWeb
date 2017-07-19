@@ -28,3 +28,4 @@ def update_feeds(request):
             scan(sitio)
         except:
             pass
+    return HttpResponse('OK')
