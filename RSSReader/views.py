@@ -15,7 +15,7 @@ def index(request):
 
 
 def create_admin(request):
-    if User.objects.find(username='admin') <= 0:
+    if User.objects.filter(username='admin') <= 0:
         admin = User(username='admin', email='diazorozcoj@gmail.com')
         admin.set_password('changeit')
         admin.save()
