@@ -19,11 +19,13 @@ from django.conf.urls.static import static
 
 from NotiWeb import settings
 from RSSReader.feeds_feed import LatestFeedsFeed
-from RSSReader.views import index
+from RSSReader.views import index, create_admin, update_feeds
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index),
     url(r'^feed/$', LatestFeedsFeed()),
+    url(r'^create_superuser/$', create_admin),
+    url(r'^update/$', update_feeds),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)\
               + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
